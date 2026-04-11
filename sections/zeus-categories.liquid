@@ -1,42 +1,106 @@
 {{ 'zeus-categories.css' | asset_url | stylesheet_tag }}
 
+<!-- Splide CSS & JS (CDN) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
 <div class="zeus-categories page-width">
   {% if section.settings.title != blank %}
     <h2 class="zeus-categories__title h2">{{ section.settings.title | escape }}</h2>
   {% endif %}
 
-  <ul class="zeus-categories__list" role="list">
-    {%- for block in section.blocks -%}
-      <li class="zeus-categories__item" {{ block.shopify_attributes }}>
-        <a href="{{ block.settings.link | default: '#' }}" class="zeus-categories__card zeus-categories__card--gradient-{{ block.settings.gradient_theme }}">
-          <div class="zeus-categories__image-wrapper">
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'zeus-categories__image' }}
-            {%- else -%}
-              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg zeus-categories__image' }}
-            {%- endif -%}
-          </div>
-          <div class="zeus-categories__content">
-            <h3 class="zeus-categories__heading">{{ block.settings.title | escape }}</h3>
-          </div>
-        </a>
-      </li>
-    {%- endfor -%}
-  </ul>
+  <div class="splide zeus-categories-splide" id="splide-{{ section.id }}">
+    <div class="splide__track">
+      <ul
+        class="splide__list zeus-categories__list"
+        role="list"
+        style="--columns-desktop: {{ section.settings.columns_desktop }};"
+      >
+        {%- for block in section.blocks -%}
+          <li class="splide__slide zeus-categories__item" {{ block.shopify_attributes }}>
+            <a
+              href="{{ block.settings.collection.url | default: block.settings.link | default: '#' }}"
+              class="zeus-categories__card"
+              style="--card-bg: {{ block.settings.bg_color | default: '#0a1c3e' }};"
+            >
+              <div class="zeus-categories__image-wrapper">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 600
+                    | image_tag: loading: 'lazy', class: 'zeus-categories__image'
+                  }}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg zeus-categories__image' }}
+                {%- endif -%}
+              </div>
+              <div class="zeus-categories__content">
+                <h3 class="zeus-categories__heading">{{ block.settings.title | escape }}</h3>
+              </div>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
 </div>
+
+<script>
+  function initZeusSplide() {
+    var el = document.querySelector('#splide-{{ section.id }}');
+    var isSwipeEnabled = {{ section.settings.swipe_on_mobile | json }};
+
+    if (isSwipeEnabled && el && !el.classList.contains('is-initialized')) {
+      new Splide(el, {
+        speed: 800,
+        perPage: 1,
+        gap: '0.5rem',
+        padding: { right: '25%' }, /* Show 1 slide and 1/4 of the next */
+        pagination: true,
+        arrows: false,
+        mediaQuery: 'min',
+        breakpoints: {
+          750: {
+            destroy: true // Destroys Splide on tablet/desktop to return to native CSS Grid
+          }
+        }
+      }).mount();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initZeusSplide);
+  document.addEventListener('shopify:section:load', function(e) {
+    if (e.detail.sectionId === '{{ section.id }}') initZeusSplide();
+  });
+</script>
 
 {% schema %}
 {
   "name": "Zeus Categories",
   "tag": "section",
   "class": "section",
-  "max_blocks": 5,
+  "max_blocks": 6,
   "settings": [
     {
       "type": "text",
       "id": "title",
-      "default": "CATEGORIE",
+      "default": "Categorie",
       "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns on desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "default": true,
+      "label": "Enable swipe on mobile"
     }
   ],
   "blocks": [
@@ -44,6 +108,12 @@
       "type": "category",
       "name": "Category",
       "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#1a3b65"
+        },
         {
           "type": "image_picker",
           "id": "image",
@@ -56,33 +126,14 @@
           "label": "Title"
         },
         {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
         },
         {
-          "type": "select",
-          "id": "gradient_theme",
-          "options": [
-            {
-              "value": "blue",
-              "label": "Blue (Uomo)"
-            },
-            {
-              "value": "red",
-              "label": "Red (Donna)"
-            },
-            {
-              "value": "navy",
-              "label": "Dark Navy (Bambino / Crotone)"
-            },
-            {
-              "value": "green",
-              "label": "Green (Accessori)"
-            }
-          ],
-          "default": "blue",
-          "label": "Gradient Theme"
+          "type": "url",
+          "id": "link",
+          "label": "Fallback Link (if no collection)"
         }
       ]
     }
@@ -95,35 +146,35 @@
           "type": "category",
           "settings": {
             "title": "Uomo",
-            "gradient_theme": "blue"
+            "bg_color": "#1a3b65"
           }
         },
         {
           "type": "category",
           "settings": {
             "title": "Donna",
-            "gradient_theme": "red"
+            "bg_color": "#8c1f28"
           }
         },
         {
           "type": "category",
           "settings": {
             "title": "Bambino",
-            "gradient_theme": "navy"
+            "bg_color": "#0d1b2a"
           }
         },
         {
           "type": "category",
           "settings": {
             "title": "FC Crotone",
-            "gradient_theme": "navy"
+            "bg_color": "#1a2444"
           }
         },
         {
           "type": "category",
           "settings": {
             "title": "Accessori",
-            "gradient_theme": "green"
+            "bg_color": "#234125"
           }
         }
       ]
