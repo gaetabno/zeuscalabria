@@ -6,23 +6,16 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Image banner",
+            "heading": "CALCIO ⚡ BASKET",
             "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
+            "button_label_1": "ACQUISTA ORA",
             "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
+            "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
@@ -31,7 +24,6 @@
       },
       "block_order": [
         "heading",
-        "text",
         "button"
       ],
       "settings": {
@@ -46,32 +38,59 @@
         "show_text_below": false
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "zeus_categories": {
+      "type": "zeus-categories",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "category-0": {
+          "type": "category",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "title": "Uomo",
+            "gradient_theme": "blue",
+            "link": ""
           }
         },
-        "text": {
-          "type": "text",
+        "category-1": {
+          "type": "category",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
+            "title": "Donna",
+            "gradient_theme": "red",
+            "link": ""
+          }
+        },
+        "category-2": {
+          "type": "category",
+          "settings": {
+            "title": "Bambino",
+            "gradient_theme": "navy",
+            "link": ""
+          }
+        },
+        "category-3": {
+          "type": "category",
+          "settings": {
+            "title": "FC Crotone",
+            "gradient_theme": "navy",
+            "link": ""
+          }
+        },
+        "category-4": {
+          "type": "category",
+          "settings": {
+            "title": "Accessori",
+            "gradient_theme": "green",
+            "link": ""
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "category-0",
+        "category-1",
+        "category-2",
+        "category-3",
+        "category-4"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "title": "Categorie"
       }
     },
     "featured_collection": {
@@ -197,12 +216,24 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "zeus_brand_logos": {
+      "type": "zeus-brand-logos",
+      "blocks": {
+        "logo-1": { "type": "logo" },
+        "logo-2": { "type": "logo" },
+        "logo-3": { "type": "logo" },
+        "logo-4": { "type": "logo" },
+        "logo-5": { "type": "logo" }
+      },
+      "block_order": [ "logo-1", "logo-2", "logo-3", "logo-4", "logo-5" ]
     }
   },
   "order": [
     "image_banner",
-    "rich_text",
+    "zeus_categories",
     "featured_collection",
+    "zeus_brand_logos",
     "collage",
     "video",
     "multicolumn"

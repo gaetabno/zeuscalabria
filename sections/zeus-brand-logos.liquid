@@ -1,0 +1,102 @@
+<div class="zeus-brands page-width">
+  <h2 class="zeus-brands__title h2">{{ section.settings.title | escape }}</h2>
+  <div class="zeus-brands__grid">
+    {% for block in section.blocks %}
+      <div class="zeus-brands__logo">
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+.zeus-brands {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.zeus-brands__title {
+  margin-bottom: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.zeus-brands__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+@media screen and (min-width: 750px) {
+  .zeus-brands__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (min-width: 990px) {
+  .zeus-brands__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+.zeus-brands__logo {
+  background-color: #f4f4f4;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  aspect-ratio: 2/1;
+}
+.zeus-brands__logo img, .zeus-brands__logo svg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+.zeus-brands__logo:hover img, .zeus-brands__logo:hover svg {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Brand Partners",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "BRAND PARTNERS",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Partners",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

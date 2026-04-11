@@ -1,0 +1,124 @@
+.zeus-categories {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+.zeus-categories__title {
+  margin-bottom: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.zeus-categories__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .zeus-categories__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .zeus-categories__list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.zeus-categories__item {
+  display: flex;
+}
+
+.zeus-categories__card {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  transition: transform 0.3s ease;
+  min-height: 140px;
+}
+
+.zeus-categories__card:hover {
+  transform: scale(1.03);
+}
+
+.zeus-categories__image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.zeus-categories__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.zeus-categories__card:hover .zeus-categories__image {
+  transform: scale(1.05); /* subtle zoom on image inside */
+}
+
+.zeus-categories__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 1.5rem 2rem;
+}
+
+.zeus-categories__heading {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+/* Gradient Overlays using ::after */
+.zeus-categories__card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.zeus-categories__card:hover::after {
+  opacity: 0.9;
+}
+
+/* Specific Gradient Themes */
+.zeus-categories__card--gradient-blue::after {
+  background: linear-gradient(135deg, #2b5c8f 0%, #001a33 100%);
+}
+
+.zeus-categories__card--gradient-red::after {
+  background: linear-gradient(135deg, #d32f2f 0%, #600000 100%);
+}
+
+.zeus-categories__card--gradient-navy::after {
+  background: linear-gradient(135deg, #1a2a4f 0%, #00081a 100%);
+}
+
+.zeus-categories__card--gradient-green::after {
+  background: linear-gradient(135deg, #3d6a2f 0%, #0f2605 100%);
+}

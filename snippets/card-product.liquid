@@ -548,6 +548,24 @@
             </div>
           {% endif %}
         {% endif %}
+        
+        <!-- Zeus Custom PLP Button -->
+        {%- if template.name == 'collection' or template.name == 'search' -%}
+          <div class="zeus-quick-add">
+            <product-form data-section-id="{{ section.id }}">
+              {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}" class="product-variant-id" {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+                <button type="submit" name="add" class="zeus-card-add-btn" aria-haspopup="dialog" {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+                  {%- if card_product.selected_or_first_available_variant.available -%}
+                    AGGIUNGI AL CARRELLO
+                  {%- else -%}
+                    ESAURITO
+                  {%- endif -%}
+                </button>
+              {%- endform -%}
+            </product-form>
+          </div>
+        {%- endif -%}
         <div class="card__badge {{ settings.badge_position }}">
           {%- if card_product.available == false -%}
             <span
