@@ -35,6 +35,9 @@
     assign money_price_max = price_max | money_with_currency
   endif
 
+  assign money_price_raw = money_price
+  assign money_price = '<span class="price-amount">' | append: money_price_raw | append: '</span>'
+
   if target == product and product.price_varies
     assign money_price = 'products.product.price.from_price_html' | t: price: money_price
   endif

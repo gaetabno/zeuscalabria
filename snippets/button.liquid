@@ -1,0 +1,60 @@
+{%- comment -%}
+  Renders a custom button, supporting 4 variants: 'primary', 'secondary', 'outline', 'link'.
+
+  Accepts:
+  - type: {String} Button type: 'primary', 'secondary', 'outline', 'link'. Default: 'primary'
+  - text: {String} Button text
+  - url: {String} URL for link buttons. If blank, it renders a <button> element.
+  - class: {String} Additional classes (e.g. 'button--full-width')
+  - name: {String} Name attribute for form buttons
+  - value: {String} Value attribute for form buttons
+  - form: {String} Form attribute for form buttons
+  - disabled: {Boolean} Disabled state
+  - id: {String} ID attribute
+  - aria_label: {String} Accessibility aria-label attribute
+
+  Usage:
+  {% render 'button', type: 'primary', text: 'Scopri di più', url: '/collections/all' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign btn_type = type | default: 'primary'
+
+  assign btn_classes = 'button'
+  if btn_type == 'secondary'
+    assign btn_classes = btn_classes | append: ' button--secondary'
+  elsif btn_type == 'outline'
+    assign btn_classes = btn_classes | append: ' button--tertiary'
+  elsif btn_type == 'link'
+    assign btn_classes = 'link'
+  endif
+
+  if class != blank
+    assign btn_classes = btn_classes | append: ' ' | append: class
+  endif
+-%}
+
+{%- if url != blank -%}
+  <a
+    href="{{ url }}"
+    class="{{ btn_classes }}"
+    style="--buttons-radius: 1.8rem; --buttons-radius-outset: 1.8rem; border-radius: 1.8rem;"
+    {% if id != blank %}id="{{ id }}"{% endif %}
+    {% if aria_label != blank %}aria-label="{{ aria_label }}"{% endif %}
+  >
+    {{ text }}
+  </a>
+{%- else -%}
+  <button
+    class="{{ btn_classes }}"
+    style="--buttons-radius: 1.8rem; --buttons-radius-outset: 1.8rem; border-radius: 1.8rem;"
+    {% if disabled %}disabled{% endif %}
+    {% if name != blank %}name="{{ name }}"{% endif %}
+    {% if value != blank %}value="{{ value }}"{% endif %}
+    {% if form != blank %}form="{{ form }}"{% endif %}
+    {% if id != blank %}id="{{ id }}"{% endif %}
+    {% if aria_label != blank %}aria-label="{{ aria_label }}"{% endif %}
+  >
+    {{ text }}
+  </button>
+{%- endif -%}

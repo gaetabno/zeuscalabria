@@ -594,6 +594,45 @@
   }
 }
 
+
+/* ZEUS CUSTOM CARD STYLES */
+.card-wrapper .card__inner {
+  border-radius: 1.8rem !important;
+  background-color: #f3f3f5 !important;
+  overflow: hidden;
+  border: none !important;
+}
+
+.card-wrapper .card__inner:after {
+  display: none !important; /* Remove dawn card shadows or borders */
+}
+
+.card-wrapper .card__media {
+  border-radius: 1.8rem !important;
+  margin: 0 !important; /* Remove dawn inner padding */
+  width: 100% !important;
+}
+
+.card-wrapper .media img {
+  mix-blend-mode: multiply; /* Helps blend product images that have white backgrounds into the gray box */
+}
+
+/* Typography styles */
+.card-wrapper .card__heading {
+  font-weight: 800 !important;
+  font-size: 1.6rem !important;
+  line-height: 1.2 !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0.2rem !important;
+}
+
+.card-wrapper .card__information {
+  padding: 1.5rem 0.5rem !important;
+}
+
 /* ZEUS CUSTOM CARD BUTTON STYLES */
 .card__content {
   display: flex !important;

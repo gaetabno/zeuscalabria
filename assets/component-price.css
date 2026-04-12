@@ -98,3 +98,17 @@
   margin-top: 0.2rem;
   color: rgba(var(--color-foreground), 0.7);
 }
+
+/* ZEUS CUSTOM PRICE AMOUNT */
+.price-item {
+  color: #1a1a1a;
+  font-weight: 500;
+  font-size: 1.6rem !important; /* Base size for entire string */
+}
+
+.price-item .price-amount {
+  color: #922b21 !important; /* Earthy dark red matching screenshot */
+  font-weight: 800 !important;
+  font-size: 1.8rem !important;
+}
+

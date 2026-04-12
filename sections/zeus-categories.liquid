@@ -1,8 +1,7 @@
-<!-- Splide CSS & JS (CDN) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-
 {{ 'zeus-categories.css' | asset_url | stylesheet_tag }}
 
+<!-- Splide CSS & JS (CDN) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 <div class="zeus-categories page-width" style="--columns-desktop: {{ section.settings.columns_desktop }};">
   {% if section.settings.title != blank %}
     <h2 class="zeus-categories__title h2">{{ section.settings.title | escape }}</h2>

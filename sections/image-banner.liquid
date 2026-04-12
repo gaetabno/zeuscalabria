@@ -136,28 +136,32 @@
               {{ block.shopify_attributes }}
             >
               {%- if block.settings.button_label_1 != blank -%}
-                <a
-                  {% if block.settings.button_link_1 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_1 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_1 | escape -}}
-                </a>
+                {%- liquid
+                  assign btn_type_1 = 'primary'
+                  if block.settings.button_style_secondary_1
+                    assign btn_type_1 = 'secondary'
+                  endif
+                  
+                  assign btn_url_1 = blank
+                  if block.settings.button_link_1 != blank
+                    assign btn_url_1 = block.settings.button_link_1
+                  endif
+                -%}
+                {% render 'button', type: btn_type_1, text: block.settings.button_label_1, url: btn_url_1 %}
               {%- endif -%}
               {%- if block.settings.button_label_2 != blank -%}
-                <a
-                  {% if block.settings.button_link_2 == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ block.settings.button_link_2 }}"
-                  {% endif %}
-                  class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label_2 | escape -}}
-                </a>
+                {%- liquid
+                  assign btn_type_2 = 'primary'
+                  if block.settings.button_style_secondary_2
+                    assign btn_type_2 = 'secondary'
+                  endif
+                  
+                  assign btn_url_2 = blank
+                  if block.settings.button_link_2 != blank
+                    assign btn_url_2 = block.settings.button_link_2
+                  endif
+                -%}
+                {% render 'button', type: btn_type_2, text: block.settings.button_label_2, url: btn_url_2 %}
               {%- endif -%}
             </div>
         {%- endcase -%}

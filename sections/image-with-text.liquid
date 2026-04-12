@@ -86,17 +86,20 @@
                   </div>
                 {%- when 'button' -%}
                   {%- if block.settings.button_label != blank -%}
-                    <a
-                      {% if block.settings.button_link == blank %}
-                        role="link" aria-disabled="true"
-                      {% else %}
-                        href="{{ block.settings.button_link }}"
-                      {% endif %}
-                      class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
-                      {{ block.shopify_attributes }}
-                    >
-                      {{ block.settings.button_label | escape }}
-                    </a>
+                    {%- liquid
+                      assign btn_type = 'primary'
+                      if block.settings.button_style_secondary
+                        assign btn_type = 'secondary'
+                      endif
+                      
+                      assign btn_url = blank
+                      if block.settings.button_link != blank
+                        assign btn_url = block.settings.button_link
+                      endif
+                    -%}
+                    <div {{ block.shopify_attributes }}>
+                      {% render 'button', type: btn_type, text: block.settings.button_label, url: btn_url %}
+                    </div>
                   {%- endif -%}
               {%- endcase -%}
             {%- endfor -%}
