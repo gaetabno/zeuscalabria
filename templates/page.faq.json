@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "zeus_faq": {
+      "type": "zeus-faq",
+      "settings": {
+        "show_hero": true,
+        "eyebrow": "Assistenza",
+        "hero_title": "Domande Frequenti",
+        "hero_subtitle": "Hai bisogno di aiuto? Trova le risposte alle domande più comuni.",
+        "section_label": "FAQ",
+        "open_first": true
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "La registrazione è necessaria per effettuare l'acquisto?",
+            "answer": "<p>Puoi completare il processo di acquisto anche semplicemente come ospite. In questo caso, durante il processo di acquisto, ti verranno chiesti solo i dati indispensabili per gli adempimenti fiscali e amministrativi e per consegnarti il prodotto che hai scelto.<\/p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quali sono i metodi di pagamento accettati?",
+            "answer": "<ol><li>PayPal: pagamento sicuro tramite account o con carta di credito.<\/li><li>Bonifico bancario: la spedizione viene effettuata all\u2019effettivo accredito dell\u2019importo totale dell\u2019ordine.<\/li><li>In caso di rimborso, questo sar\u00e0 effettuato sullo stesso mezzo di pagamento utilizzato all\u2019acquisto.<\/li><\/ol>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quando riceverò il mio ordine?",
+            "answer": "<p>Il tempo di consegna, puramente indicativo, \u00e8 di circa 5 giorni lavorativi dalla data di pagamento dell\u2019ordine e di 10 giorni lavorativi per articoli personalizzati. I tempi potranno subire variazioni per cause di forza maggiore o a causa delle condizioni di traffico e della viabilit\u00e0 in genere, o per atto delle Autorit\u00e0.<\/p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quali sono le modalità di consegna?",
+            "answer": "<p>La consegna, salvo diverso accordo scritto fra le parti, avverr\u00e0 negli orari di ufficio: dalle ore 8.30 alle ore 12.30 e dalle 15.30 alle ore 19.30, di tutti i giorni non festivi, dal luned\u00ec al venerd\u00ec.<\/p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Condizioni di Vendita",
+            "answer": "<p><a href=\"\/pages\/termini-e-condizioni-di-uso\">Leggi le condizioni di vendita.<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"]
+    }
+  },
+  "order": ["zeus_faq"]
+}

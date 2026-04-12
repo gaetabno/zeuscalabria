@@ -1,0 +1,197 @@
+{{ 'zeus-faq.css' | asset_url | stylesheet_tag }}
+
+{%- if section.settings.show_hero -%}
+  <div class="zeus-faq-hero">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="zeus-faq-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    <h1 class="zeus-faq-hero__title">{{ section.settings.hero_title | escape }}</h1>
+    {%- if section.settings.hero_subtitle != blank -%}
+      <p class="zeus-faq-hero__subtitle">{{ section.settings.hero_subtitle | escape }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+<div class="zeus-faq">
+  {%- if section.settings.section_label != blank -%}
+    <p class="zeus-faq__section-label">{{ section.settings.section_label | escape }}</p>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <ul class="zeus-faq__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.question != blank -%}
+          <li class="zeus-faq__item" {{ block.shopify_attributes }}>
+            <details
+              class="zeus-faq__details"
+              id="FaqDetails-{{ block.id }}-{{ section.id }}"
+              {% if forloop.first and section.settings.open_first %}open{% endif %}
+            >
+              <summary
+                class="zeus-faq__summary"
+                id="FaqSummary-{{ block.id }}-{{ section.id }}"
+                aria-expanded="{% if forloop.first and section.settings.open_first %}true{% else %}false{% endif %}"
+              >
+                <h3 class="zeus-faq__question">{{ block.settings.question | escape }}</h3>
+                <span class="zeus-faq__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                  </svg>
+                </span>
+              </summary>
+              <div
+                class="zeus-faq__answer"
+                id="FaqAnswer-{{ block.id }}-{{ section.id }}"
+                role="region"
+                aria-labelledby="FaqSummary-{{ block.id }}-{{ section.id }}"
+              >
+                {{ block.settings.answer }}
+              </div>
+            </details>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+
+<script defer>
+  (function () {
+    document.querySelectorAll('.zeus-faq__details').forEach(function (details) {
+      var summary = details.querySelector('.zeus-faq__summary');
+      if (!summary) return;
+
+      summary.addEventListener('click', function () {
+        var willOpen = !details.open;
+        summary.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Zeus FAQ",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Mostra hero banner",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Etichetta sopra il titolo",
+      "default": "Assistenza"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Titolo hero",
+      "default": "Domande Frequenti"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Sottotitolo hero",
+      "default": "Hai bisogno di aiuto? Trova le risposte alle domande più comuni."
+    },
+    {
+      "type": "header",
+      "content": "Accordion"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Etichetta sezione",
+      "default": "FAQ"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Apri la prima domanda di default",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Domanda & Risposta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Domanda",
+          "default": "Inserisci la tua domanda"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Risposta",
+          "default": "<p>Inserisci la risposta qui.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zeus FAQ",
+      "settings": {
+        "eyebrow": "Assistenza",
+        "hero_title": "Domande Frequenti",
+        "hero_subtitle": "Hai bisogno di aiuto? Trova le risposte alle domande più comuni.",
+        "section_label": "FAQ",
+        "open_first": true
+      },
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "La registrazione è necessaria per effettuare l'acquisto?",
+            "answer": "<p>Puoi completare il processo di acquisto anche semplicemente come ospite. In questo caso, durante il processo di acquisto, ti verranno chiesti solo i dati indispensabili per gli adempimenti fiscali e amministrativi e per consegnarti il prodotto che hai scelto.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quali sono i metodi di pagamento accettati?",
+            "answer": "<ol><li>PayPal: pagamento sicuro tramite account o con carta di credito.</li><li>Bonifico bancario: la spedizione viene effettuata all'effettivo accredito dell'importo totale dell'ordine.</li><li>In caso di rimborso, questo sarà effettuato sullo stesso mezzo di pagamento utilizzato all'acquisto.</li></ol>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quando riceverò il mio ordine?",
+            "answer": "<p>Il tempo di consegna, puramente indicativo, è di circa 5 giorni lavorativi dalla data di pagamento dell'ordine e di 10 giorni lavorativi per articoli personalizzati. I tempi potranno subire variazioni per cause di forza maggiore o a causa delle condizioni di traffico e della viabilità in genere, o per atto delle Autorità.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Quali sono le modalità di consegna?",
+            "answer": "<p>La consegna, salvo diverso accordo scritto fra le parti, avverrà negli orari di ufficio: dalle ore 8.30 alle ore 12.30 e dalle 15.30 alle ore 19.30, di tutti i giorni non festivi, dal lunedì al venerdì.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Condizioni di Vendita",
+            "answer": "<p><a href=\"/pages/termini-e-condizioni-di-uso\">Leggi le condizioni di vendita.</a></p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
