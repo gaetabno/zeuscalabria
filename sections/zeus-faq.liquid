@@ -2,13 +2,15 @@
 
 {%- if section.settings.show_hero -%}
   <div class="zeus-faq-hero">
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="zeus-faq-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-    {%- endif -%}
-    <h1 class="zeus-faq-hero__title">{{ section.settings.hero_title | escape }}</h1>
-    {%- if section.settings.hero_subtitle != blank -%}
-      <p class="zeus-faq-hero__subtitle">{{ section.settings.hero_subtitle | escape }}</p>
-    {%- endif -%}
+    <div class="zeus-faq-hero__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="zeus-faq-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="zeus-faq-hero__title">{{ section.settings.hero_title | escape }}</h1>
+      {%- if section.settings.hero_subtitle != blank -%}
+        <p class="zeus-faq-hero__subtitle">{{ section.settings.hero_subtitle | escape }}</p>
+      {%- endif -%}
+    </div>
   </div>
 {%- endif -%}
 
