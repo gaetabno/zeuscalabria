@@ -1,0 +1,33 @@
+{% comment %}
+  Outputs the hex color for a given color name.
+  Uses a string-based lookup — no case/when required.
+
+  Accepts:
+  - name: {String} lowercase color name to look up (e.g. 'nero', 'blue')
+
+  Returns:
+  - The hex value as plain text (e.g. '#0d0d0d'), or nothing if not found.
+
+  Usage (capture the output):
+    {%- capture swatch_value -%}
+      {%- render 'swatch-color-map', name: value_lower -%}
+    {%- endcapture -%}
+
+  To add a color:
+  Append ',name|#hexcode' to the zeus_color_map string below.
+  Multiple names for the same color: add separate entries.
+  All names must be lowercase. Keep in sync with config/shopify_swatches.json.
+{% endcomment %}
+{%- liquid
+  assign zeus_color_map = 'nero|#0d0d0d,black|#0d0d0d,bianco|#ffffff,white|#ffffff,bianco ottico|#f5f5f5,grigio|#9e9e9e,grey|#9e9e9e,gray|#9e9e9e,grigio chiaro|#d9d9d9,light grey|#d9d9d9,light gray|#d9d9d9,grigio scuro|#3b3b3b,dark grey|#3b3b3b,dark gray|#3b3b3b,grigio antracite|#3b3b3b,antracite|#3b3b3b,rosso|#cc0000,red|#cc0000,rosso scarlatto|#eb001b,scarlet|#eb001b,bordeaux|#7d0027,burgundi|#7d0027,burgundy|#7d0027,wine|#7d0027,blu|#003399,blue|#003399,blu navy|#001f5b,navy|#001f5b,navy blue|#001f5b,blu royal|#1a3cc8,royal blue|#1a3cc8,blu elettrico|#0047ff,electric blue|#0047ff,blu cobalto|#0057b8,cobalt|#0057b8,cobalt blue|#0057b8,blu petrolio|#005f73,petrolio|#005f73,teal blue|#005f73,azzurro|#5bc0eb,light blue|#5bc0eb,sky blue|#5bc0eb,celeste|#87ceeb,verde|#2d6a2d,green|#2d6a2d,verde militare|#4b5320,military green|#4b5320,olive|#4b5320,verde fluo|#39ff14,fluo green|#39ff14,neon green|#39ff14,verde bottiglia|#1a4731,bottle green|#1a4731,forest green|#1a4731,verde salvia|#8ea677,sage|#8ea677,sage green|#8ea677,giallo|#ffd600,yellow|#ffd600,giallo fluo|#ffe600,fluo yellow|#ffe600,neon yellow|#ffe600,oro|#c9a84c,gold|#c9a84c,arancione|#ff6d00,arancio|#ff6d00,orange|#ff6d00,arancione fluo|#ff4500,fluo orange|#ff4500,neon orange|#ff4500,rosa|#f48fb1,pink|#f48fb1,rosa fluo|#ff69b4,fluo pink|#ff69b4,neon pink|#ff69b4,hot pink|#ff69b4,fucsia|#e91e8c,fuchsia|#e91e8c,magenta|#e91e8c,viola|#6a0dad,purple|#6a0dad,violet|#6a0dad,lilla|#b39ddb,lilac|#b39ddb,lavender|#b39ddb,beige|#d4b896,sand|#d4b896,cream|#d4b896,marrone|#795548,brown|#795548,camel|#c19a6b,caramel|#c19a6b,tan|#c19a6b,argento|#b0bec5,silver|#b0bec5,bronzo|#cd7f32,bronze|#cd7f32,turchese|#00bcd4,turquoise|#00bcd4,cyan|#00bcd4,corallo|#ff6f61,coral|#ff6f61'
+
+  comment
+    String lookup: search for ',name|' to avoid partial-name false positives.
+    Prepend ',' to both haystack and needle so the first entry is also matched.
+  endcomment
+  assign _key = ',' | append: name | append: '|'
+  assign _haystack = ',' | append: zeus_color_map
+  if _haystack contains _key
+    echo _haystack | split: _key | last | split: ',' | first
+  endif
+-%}

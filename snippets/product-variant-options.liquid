@@ -32,7 +32,21 @@
     else
       assign swatch_value = null
     endif
+  -%}
 
+  {%- comment -%}
+    Fallback: delegate color name lookup to swatch-color-map snippet.
+    To add or edit colors, edit snippets/swatch-color-map.liquid only.
+  {%- endcomment -%}
+  {%- if swatch_value == null -%}
+    {%- assign _color_name = value | downcase -%}
+    {%- capture swatch_value -%}
+      {%- render 'swatch-color-map', name: _color_name -%}
+    {%- endcapture -%}
+    {%- if swatch_value == blank -%}{%- assign swatch_value = null -%}{%- endif -%}
+  {%- endif -%}
+
+  {%- liquid
     assign option_disabled = true
     if value.available
       assign option_disabled = false
@@ -58,7 +72,7 @@
     </span>
   {%- endcapture -%}
 
-  {% assign escaped_value = value | escape %}
+  {%- assign escaped_value = value | escape -%}
 
   {%- if picker_type == 'swatch' -%}
     {%- capture help_text -%}
@@ -66,19 +80,47 @@
       {{ label_unavailable }}
     {%- endcapture -%}
 
-    {%
-      render 'swatch-input',
-      id: input_id,
-      name: input_name,
-      value: escaped_value,
-      swatch: value.swatch,
-      product_form_id: product_form_id,
-      checked: value.selected,
-      visually_disabled: option_disabled,
-      shape: block.settings.swatch_shape,
-      help_text: help_text,
-      additional_props: input_dataset
-    %}
+    {%- if swatch_value -%}
+      {%- comment -%} Render with our computed swatch_value (native OR Liquid fallback) {%- endcomment -%}
+      <input
+        type="radio"
+        id="{{ input_id }}"
+        name="{{ input_name }}"
+        value="{{ escaped_value }}"
+        form="{{ product_form_id }}"
+        class="swatch-input__input{% if option_disabled %} visually-disabled{% endif %}"
+        {% if value.selected %}
+          checked
+        {% endif %}
+        {{ input_dataset }}
+      >
+      <label
+        for="{{ input_id }}"
+        title="{{ escaped_value }}"
+        class="swatch-input__label{% if block.settings.swatch_shape == 'square' %} swatch-input__label--square{% endif %}"
+      >
+        <span
+          class="swatch{% if block.settings.swatch_shape == 'square' %} swatch--square{% endif %}"
+          style="--swatch--background: {{ swatch_value }};"
+        ></span>
+        {{ help_text }}
+      </label>
+    {%- else -%}
+      {%- comment -%} No color mapping: fall back to native swatch-input snippet {%- endcomment -%}
+      {% render 'swatch-input',
+        id: input_id,
+        name: input_name,
+        value: escaped_value,
+        swatch: value.swatch,
+        product_form_id: product_form_id,
+        checked: value.selected,
+        visually_disabled: option_disabled,
+        shape: block.settings.swatch_shape,
+        help_text: help_text,
+        additional_props: input_dataset
+      %}
+    {%- endif -%}
+
   {%- elsif picker_type == 'button' -%}
     <input
       type="radio"
