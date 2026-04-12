@@ -636,34 +636,48 @@
 /* ZEUS CUSTOM CARD BUTTON STYLES */
 .card__content {
   display: flex !important;
-  flex-direction: column !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: flex-end !important;
 }
+
+.card-wrapper .card__information {
+  padding: 1.5rem 0.5rem !important;
+  flex: 1;
+}
+
 .zeus-quick-add {
-  margin-top: auto; /* push to bottom */
-  width: 100%;
+  width: auto;
+  margin-bottom: 1rem;
 }
+
 .zeus-card-add-btn {
-  background-color: #E3000F !important;
-  color: #fff !important;
-  text-transform: uppercase;
-  font-weight: 800;
-  width: 100%;
-  border-radius: 0;
-  border: none;
-  padding: 1.5rem 1rem;
-  transition: background-color 0.3s ease;
+  background-color: transparent !important;
+  color: #1a1a1a !important;
+  padding: 0.5rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
+  border: none;
+  border-radius: 50%;
 }
+
+.zeus-card-add-btn svg {
+  width: 3.2rem;
+  height: 3.2rem;
+  stroke: currentColor;
+}
+
 .zeus-card-add-btn:hover {
-  background-color: #B3000C !important;
+  background-color: transparent !important;
+  transform: scale(1.1);
+  opacity: 0.7;
 }
+
 .zeus-card-add-btn[disabled] {
-  background-color: #ccc !important;
+  opacity: 0.3;
   cursor: not-allowed;
-  color: #666 !important;
 }
+

@@ -303,12 +303,13 @@
                   id="{{ product_form_id }}-submit"
                   type="submit"
                   name="add"
-                  class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
+                  class="quick-add__submit zeus-card-add-btn{% if horizontal_quick_add %} card--horizontal__quick-add animate-arrow{% endif %}"
                   aria-haspopup="dialog"
                   aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                   data-product-url="{{ card_product.url }}"
                 >
-                  {{ 'products.product.choose_options' | t }}
+                  {{- 'icon-add-to-bag.svg' | inline_asset_content -}}
+                  <span class="visually-hidden">{{ 'products.product.choose_options' | t }}</span>
                   {%- if horizontal_quick_add -%}
                     <span class="icon-wrap">
                       {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -358,7 +359,7 @@
                     id="{{ product_form_id }}-submit"
                     type="submit"
                     name="add"
-                    class="quick-add__submit button button--full-width button--secondary{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
+                    class="quick-add__submit zeus-card-add-btn{% if horizontal_quick_add %} card--horizontal__quick-add{% endif %}"
                     aria-haspopup="dialog"
                     aria-labelledby="{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}"
                     aria-live="polite"
@@ -369,9 +370,10 @@
                   >
                     <span>
                       {%- if card_product.selected_or_first_available_variant.available -%}
-                        {{ 'products.product.add_to_cart' | t }}
+                        {{- 'icon-add-to-bag.svg' | inline_asset_content -}}
+                        <span class="visually-hidden">{{ 'products.product.add_to_cart' | t }}</span>
                       {%- else -%}
-                        {{ 'products.product.sold_out' | t }}
+                        ESAURITO
                       {%- endif -%}
                     </span>
                     <span class="sold-out-message hidden">
@@ -548,16 +550,39 @@
             </div>
           {% endif %}
         {% endif %}
-        
+
         <!-- Zeus Custom PLP Button -->
         {%- if template.name == 'collection' or template.name == 'search' -%}
           <div class="zeus-quick-add">
             <product-form data-section-id="{{ section.id }}">
-              {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}" class="product-variant-id" {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
-                <button type="submit" name="add" class="zeus-card-add-btn" aria-haspopup="dialog" {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}>
+              {%- form 'product',
+                card_product,
+                id: product_form_id,
+                class: 'form',
+                novalidate: 'novalidate',
+                data-type: 'add-to-cart-form'
+              -%}
+                <input
+                  type="hidden"
+                  name="id"
+                  value="{{ card_product.selected_or_first_available_variant.id }}"
+                  class="product-variant-id"
+                  {% if card_product.selected_or_first_available_variant.available == false %}
+                    disabled
+                  {% endif %}
+                >
+                <button
+                  type="submit"
+                  name="add"
+                  class="zeus-card-add-btn"
+                  aria-haspopup="dialog"
+                  {% if card_product.selected_or_first_available_variant.available == false %}
+                    disabled
+                  {% endif %}
+                >
                   {%- if card_product.selected_or_first_available_variant.available -%}
-                    AGGIUNGI AL CARRELLO
+                    {{- 'icon-add-to-bag.svg' | inline_asset_content -}}
+                    <span class="visually-hidden">Aggiungi al carrello</span>
                   {%- else -%}
                     ESAURITO
                   {%- endif -%}
