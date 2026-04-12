@@ -37,7 +37,7 @@
       ],
       "settings": {
         "image_overlay_opacity": 40,
-        "image_height": "large",
+        "image_height": "small",
         "image_behavior": "none",
         "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
@@ -54,46 +54,51 @@
         "category-0": {
           "type": "category",
           "settings": {
+            "bg_color": "#1a3b65",
             "image": "shopify://shop_images/man-adjusts-blue-tuxedo-bowtie_925x_7a35b875-1dc5-4c32-82e3-d0d2ff80c436.jpg",
             "title": "Uomo",
-            "link": "",
-            "gradient_theme": "blue"
+            "collection": "",
+            "link": ""
           }
         },
         "category-1": {
           "type": "category",
           "settings": {
+            "bg_color": "#1a3b65",
             "image": "shopify://shop_images/woman-in-the-city_925x_f6d1cfa4-4d10-4f3e-ac24-01ec5fcc476e.jpg",
             "title": "Donna",
-            "link": "",
-            "gradient_theme": "red"
+            "collection": "",
+            "link": ""
           }
         },
         "category-2": {
           "type": "category",
           "settings": {
+            "bg_color": "#1a3b65",
             "image": "shopify://shop_images/casual-fashion-woman_925x_1bf747c8-5c3e-4924-b7de-e49c3a19064d.jpg",
             "title": "Bambino",
-            "link": "",
-            "gradient_theme": "navy"
+            "collection": "",
+            "link": ""
           }
         },
         "category-3": {
           "type": "category",
           "settings": {
+            "bg_color": "#1a3b65",
             "image": "shopify://shop_images/womens-red-t-shirt_925x_652e8ca3-4fb2-4b70-9ebd-4fd8954b8b5b.jpg",
             "title": "FC Crotone",
-            "link": "",
-            "gradient_theme": "navy"
+            "collection": "",
+            "link": ""
           }
         },
         "category-4": {
           "type": "category",
           "settings": {
+            "bg_color": "#1a3b65",
             "image": "shopify://shop_images/putting-on-your-shoes_925x_01af91c2-0cdf-4598-b1b8-e5183165bc95.jpg",
             "title": "Accessori",
-            "link": "",
-            "gradient_theme": "green"
+            "collection": "",
+            "link": ""
           }
         }
       },
@@ -105,7 +110,9 @@
         "category-4"
       ],
       "settings": {
-        "title": "Categorie"
+        "title": "Categorie",
+        "columns_desktop": 5,
+        "swipe_on_mobile": true
       }
     },
     "featured_collection": {
@@ -113,7 +120,7 @@
       "settings": {
         "collection": "all",
         "products_to_show": 14,
-        "title": "Featured products",
+        "title": "Prodotti in evidenza",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -121,10 +128,10 @@
         "columns_desktop": 4,
         "enable_desktop_slider": false,
         "full_width": false,
-        "show_view_all": false,
+        "show_view_all": true,
         "view_all_style": "solid",
         "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
+        "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
