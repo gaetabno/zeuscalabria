@@ -221,8 +221,37 @@
                               </span>
                             {%- endcapture -%}
 
+                            {%- comment -%} Check for color filter and resolve swatch hex via our map {%- endcomment -%}
+                            {%- assign filter_label_lower = filter.label | downcase -%}
+                            {%- assign facet_swatch_value = null -%}
+                            {%- if filter_label_lower == 'colore' or filter_label_lower == 'color' or filter_label_lower == 'colour' -%}
+                              {%- assign _facet_color_name = value.label | downcase -%}
+                              {%- capture facet_swatch_value -%}
+                                {%- render 'swatch-color-map', name: _facet_color_name -%}
+                              {%- endcapture -%}
+                              {%- if facet_swatch_value == blank -%}{%- assign facet_swatch_value = null -%}{%- endif -%}
+                            {%- endif -%}
+
                             <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
-                              {%- if presentation == 'swatch' -%}
+                              {%- if facet_swatch_value -%}
+                                {%- comment -%} Color filter with theme-side swatch fallback {%- endcomment -%}
+                                <label for="{{ input_id }}" class="{{ label_class }} facets__label--swatch">
+                                  <input
+                                    type="checkbox"
+                                    name="{{ value.param_name }}"
+                                    value="{{ value.value }}"
+                                    id="{{ input_id }}"
+                                    {% if value.active %}checked{% endif %}
+                                    {% if is_disabled %}disabled{% endif %}
+                                  >
+                                  <span
+                                    class="facet-swatch{% if value.active %} facet-swatch--active{% endif %}{% if is_disabled %} facet-swatch--disabled{% endif %}"
+                                    style="--swatch--background: {{ facet_swatch_value }};"
+                                    aria-hidden="true"
+                                  ></span>
+                                  {{ text_value }}
+                                </label>
+                              {%- elsif presentation == 'swatch' -%}
                                 <div class="{{ label_class }}">
                                   <div class="swatch-input-wrapper">
                                     {% render 'swatch-input',
@@ -566,8 +595,38 @@
                                 </span>
                               {%- endcapture -%}
 
+                              {%- comment -%} Check for color filter and resolve swatch hex via our map {%- endcomment -%}
+                              {%- assign filter_label_lower = filter.label | downcase -%}
+                              {%- assign facet_swatch_value = null -%}
+                              {%- if filter_label_lower == 'colore' or filter_label_lower == 'color' or filter_label_lower == 'colour' -%}
+                                {%- assign _facet_color_name = value.label | downcase -%}
+                                {%- capture facet_swatch_value -%}
+                                  {%- render 'swatch-color-map', name: _facet_color_name -%}
+                                {%- endcapture -%}
+                                {%- if facet_swatch_value == blank -%}{%- assign facet_swatch_value = null -%}{%- endif -%}
+                              {%- endif -%}
+
                               <li class="mobile-facets__item list-menu__item">
-                                {% if presentation == 'swatch' %}
+                                {%- if facet_swatch_value -%}
+                                  {%- comment -%} Color filter with theme-side swatch fallback {%- endcomment -%}
+                                  <label for="{{ input_id }}" class="{{ label_class }} facets__label--swatch">
+                                    <input
+                                      class="mobile-facets__checkbox"
+                                      type="checkbox"
+                                      name="{{ value.param_name }}"
+                                      value="{{ value.value }}"
+                                      id="{{ input_id }}"
+                                      {% if value.active %}checked{% endif %}
+                                      {% if is_disabled %}disabled{% endif %}
+                                    >
+                                    <span
+                                      class="facet-swatch{% if value.active %} facet-swatch--active{% endif %}{% if is_disabled %} facet-swatch--disabled{% endif %}"
+                                      style="--swatch--background: {{ facet_swatch_value }};"
+                                      aria-hidden="true"
+                                    ></span>
+                                    {{ text_value }}
+                                  </label>
+                                {%- elsif presentation == 'swatch' -%}
                                   <div class="{{ label_class }}">
                                     <div class="swatch-input-wrapper">
                                       {% render 'swatch-input',
@@ -584,7 +643,7 @@
 
                                     {{ text_value }}
                                   </div>
-                                {% else %}
+                                {%- else -%}
                                   <label for="{{ input_id }}" class="{{ label_class }}">
                                     <input
                                       class="mobile-facets__checkbox"
@@ -618,7 +677,7 @@
 
                                     {{ text_value }}
                                   </label>
-                                {% endif %}
+                                {%- endif -%}
                               </li>
                             {%- endfor -%}
                           </ul>
