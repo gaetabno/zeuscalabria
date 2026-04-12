@@ -1516,7 +1516,7 @@ details[open] > .share-button__fallback {
 }
 
 .share-button__fallback .field {
-  border-radius: 0;
+  border-radius: var(--inputs-radius);
   min-width: auto;
   min-height: auto;
   transition: none;

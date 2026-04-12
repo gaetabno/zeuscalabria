@@ -89,7 +89,7 @@
 
 .facet-filters__field .select__select,
 .mobile-facets__sort .select__select {
-  border-radius: 0;
+  border-radius: var(--inputs-radius);
   min-width: auto;
   min-height: auto;
   transition: none;
@@ -106,7 +106,7 @@
 .facet-filters__sort {
   background-color: transparent;
   border: 0;
-  border-radius: 0;
+  border-radius: var(--inputs-radius);
   font-size: 1.4rem;
   height: auto;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
@@ -229,6 +229,11 @@
   text-underline-offset: 0.3rem;
 }
 
+.facets__summary-label {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 .facets__and-helptext {
   color: rgba(var(--color-foreground), 0.5);
   font-size: calc(var(--font-heading-scale) * 1.2rem);
@@ -265,12 +270,6 @@
 }
 
 .facets__display {
-  border-width: var(--popup-border-width);
-  border-style: solid;
-  border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
-  border-radius: var(--popup-corner-radius);
-  box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius)
-    rgba(var(--color-shadow), var(--popup-shadow-opacity));
   background-color: rgb(var(--color-background));
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -591,14 +590,16 @@ button.facets__button {
 
 span.active-facets__button-inner {
   color: rgb(var(--color-foreground));
-  box-shadow: 0 0 0 0.1rem rgb(var(--color-foreground));
-  border-radius: 2.6rem;
-  font-size: 1rem;
+  border-radius: var(--buttons-radius-outset);
+  border: 1px solid rgba(var(--color-foreground), 0.5);
+  font-size: 1.3rem;
   min-height: 0;
   min-width: 0;
-  padding: 0.25rem 1.25rem;
+  padding: 0.6rem 1.2rem;
   display: flex;
   align-items: center;
+  background-color: rgb(var(--color-background));
+  transition: border-color var(--duration-short) ease, background-color var(--duration-short) ease, color var(--duration-short) ease;
 }
 
 span.active-facets__button-inner:before,
@@ -651,15 +652,16 @@ span.active-facets__button-inner:after {
 }
 
 .active-facets__button:hover .active-facets__button-inner {
-  box-shadow: 0 0 0 0.2rem rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
+  background-color: rgba(var(--color-foreground), 0.05);
 }
 
 .active-facets__button--light .active-facets__button-inner {
-  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
+  border-color: rgba(var(--color-foreground), 0.2);
 }
 
 .active-facets__button--light:hover .active-facets__button-inner {
-  box-shadow: 0 0 0 0.2rem rgba(var(--color-foreground), 0.4);
+  border-color: rgb(var(--color-foreground));
 }
 
 a.active-facets__button:focus-visible {
@@ -693,7 +695,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 .active-facets__button .svg-wrapper {
   align-self: center;
   flex-shrink: 0;
-  margin-left: 0.6rem;
+  margin-left: 0.8rem;
   margin-right: -0.2rem;
   pointer-events: none;
   width: 1.2rem;
@@ -966,6 +968,18 @@ details.menu-opening .mobile-facets__close .svg-wrapper {
   align-items: center;
 }
 
+.mobile-facets__summary > div > span {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.js .mobile-facets__submenu-static {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .js .mobile-facets__submenu {
   position: absolute;
   top: 0;
@@ -992,9 +1006,7 @@ details.menu-opening .mobile-facets__close .svg-wrapper {
   overflow-y: auto;
 }
 
-.js .mobile-facets .submenu-open {
-  visibility: hidden; /* hide menus from screen readers when hidden by submenu */
-}
+/* removed .js .mobile-facets .submenu-open visibility hidden to fix accordion clicks */
 
 .mobile-facets__item {
   position: relative;
@@ -1087,7 +1099,7 @@ input.mobile-facets__checkbox {
 
 .mobile-facets__sort .select__select {
   background-color: transparent;
-  border-radius: 0;
+  border-radius: var(--inputs-radius);
   box-shadow: none;
   filter: none;
   margin-left: 0.5rem;
@@ -1148,6 +1160,11 @@ input.mobile-facets__checkbox {
     padding-top: 1.5rem;
     margin-bottom: 0;
     padding-bottom: 1.5rem;
+  }
+  
+  .facets__summary span {
+    text-transform: uppercase;
+    font-weight: bold;
   }
 
   .facets__heading--vertical {
