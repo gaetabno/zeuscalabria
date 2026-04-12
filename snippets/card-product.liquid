@@ -552,7 +552,8 @@
         {% endif %}
 
         <!-- Zeus Custom PLP Button -->
-        {%- if template.name == 'collection' or template.name == 'search' -%}
+        {% comment %} {%- if template.name == 'collection' or template.name == 'search' -%} {% endcomment %}
+        {%- if template.name == 'search' -%}
           <div class="zeus-quick-add">
             <product-form data-section-id="{{ section.id }}">
               {%- form 'product',
