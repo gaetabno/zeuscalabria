@@ -19,11 +19,6 @@
   gap: 1.5rem;
 }
 
-/* When Splide finishes loading and mounting, switch to flex so the slider works natively */
-.splide.is-active .zeus-categories__list,
-.splide.is-initialized .zeus-categories__list {
-  display: flex !important;
-}
 
 /* Offset Splide pagination below the slider */
 .zeus-categories-splide {
@@ -36,14 +31,9 @@
   background: #0a1c3e !important;
 }
 
-@media screen and (min-width: 750px) {
-  .zeus-categories__list {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+ 
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 768px) {
   .zeus-categories__list {
     display: grid !important;
     grid-template-columns: repeat(var(--columns-desktop, 3), 1fr);
@@ -52,14 +42,14 @@
 
 .zeus-categories__item {
   display: flex;
+  border-radius: 1.8rem;
+  overflow: hidden;
 }
 
 .zeus-categories__card {
   position: relative;
   display: block;
   width: 100%;
-  border-radius: 1.8rem;
-  overflow: hidden;
   background-color: var(--card-bg);
   transition: transform 0.3s ease;
   min-height: 120px;
@@ -99,14 +89,17 @@
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 1.5rem 2.5rem;
-  width: 60%; /* text constraints so it doesn't overlap face */
+  padding: 1rem; /* minimal padding to maximize space */
+  width: 100%;
+  max-width: 80%; /* Let text stretch more over the dark gradient to prevent squishing */
 }
 
 .zeus-categories__heading {
   color: #fff;
-  font-size: 2.6rem;
+  font-size: clamp(1.4rem, 2vw, 2.2rem);
   font-weight: 800;
   margin: 0;
   line-height: 1.1;
+  word-break: normal;
+  white-space: normal;
 }

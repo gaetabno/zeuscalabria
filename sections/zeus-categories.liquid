@@ -1,10 +1,9 @@
-{{ 'zeus-categories.css' | asset_url | stylesheet_tag }}
-
 <!-- Splide CSS & JS (CDN) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
-<div class="zeus-categories page-width">
+{{ 'zeus-categories.css' | asset_url | stylesheet_tag }}
+
+<div class="zeus-categories page-width" style="--columns-desktop: {{ section.settings.columns_desktop }};">
   {% if section.settings.title != blank %}
     <h2 class="zeus-categories__title h2">{{ section.settings.title | escape }}</h2>
   {% endif %}
@@ -14,7 +13,6 @@
       <ul
         class="splide__list zeus-categories__list"
         role="list"
-        style="--columns-desktop: {{ section.settings.columns_desktop }};"
       >
         {%- for block in section.blocks -%}
           <li class="splide__slide zeus-categories__item" {{ block.shopify_attributes }}>
@@ -45,6 +43,8 @@
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
 <script>
   function initZeusSplide() {
     var el = document.querySelector('#splide-{{ section.id }}');
@@ -60,7 +60,7 @@
         arrows: false,
         mediaQuery: 'min',
         breakpoints: {
-          750: {
+          768: {
             destroy: true // Destroys Splide on tablet/desktop to return to native CSS Grid
           }
         }
