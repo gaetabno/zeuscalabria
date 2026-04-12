@@ -134,6 +134,29 @@
         "padding_bottom": 12
       }
     },
+    "rich_text_3kfptE": {
+      "type": "rich-text",
+      "blocks": {
+        "text_UDhWtW": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.description }}"
+          }
+        }
+      },
+      "block_order": [
+        "text_UDhWtW"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
@@ -199,6 +222,7 @@
   },
   "order": [
     "main",
+    "rich_text_3kfptE",
     "multicolumn",
     "related-products"
   ]
