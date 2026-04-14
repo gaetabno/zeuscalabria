@@ -149,7 +149,8 @@
         "logo_3PinQP": {
           "type": "logo",
           "settings": {
-            "link": ""
+            "link": "shopify://collections",
+            "image": "shopify://shop_images/zeus-calabria-logo.png"
           }
         },
         "logo_imyVHR": {
