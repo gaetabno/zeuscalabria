@@ -4,8 +4,6 @@
     {% for block in section.blocks %}
       <div class="zeus-brands__logo">
         {% if block.settings.image != blank %}
-          {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
-        {% else %}
           {% if block.settings.link != blank %}
             <a href="{{ block.settings.link }}">
               {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
@@ -13,6 +11,8 @@
           {% else %}
             {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
           {% endif %}
+        {% else %}
+          {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
       </div>
     {% endfor %}
