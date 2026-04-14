@@ -6,7 +6,13 @@
         {% if block.settings.image != blank %}
           {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
         {% else %}
-          {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}">
+              {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+            </a>
+          {% else %}
+            {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
         {% endif %}
       </div>
     {% endfor %}
@@ -14,51 +20,53 @@
 </div>
 
 <style>
-.zeus-brands {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
-}
-.zeus-brands__title {
-  margin-bottom: 2rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-.zeus-brands__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-@media screen and (min-width: 768px) {
-  .zeus-brands__grid {
-    grid-template-columns: repeat(4, 1fr);
+  .zeus-brands {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
   }
-}
-@media screen and (min-width: 768px) {
-  .zeus-brands__grid {
-    grid-template-columns: repeat(5, 1fr);
+  .zeus-brands__title {
+    margin-bottom: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
   }
-}
-.zeus-brands__logo {
-  background-color: #f4f4f4;
-  border-radius: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
-  aspect-ratio: 2/1;
-}
-.zeus-brands__logo img, .zeus-brands__logo svg {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.6;
-  transition: all 0.3s ease;
-}
-.zeus-brands__logo:hover img, .zeus-brands__logo:hover svg {
-  filter: grayscale(0%);
-  opacity: 1;
-}
+  .zeus-brands__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  @media screen and (min-width: 768px) {
+    .zeus-brands__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .zeus-brands__grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  .zeus-brands__logo {
+    background-color: #f4f4f4;
+    border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    aspect-ratio: 2/1;
+  }
+  .zeus-brands__logo img,
+  .zeus-brands__logo svg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+  .zeus-brands__logo:hover img,
+  .zeus-brands__logo:hover svg {
+    filter: grayscale(0%);
+    opacity: 1;
+  }
 </style>
 
 {% schema %}
@@ -79,6 +87,11 @@
       "name": "Logo",
       "settings": [
         {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
           "type": "image_picker",
           "id": "image",
           "label": "Image"
@@ -89,13 +102,7 @@
   "presets": [
     {
       "name": "Brand Partners",
-      "blocks": [
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" },
-        { "type": "logo" }
-      ]
+      "blocks": [{ "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" }]
     }
   ]
 }
