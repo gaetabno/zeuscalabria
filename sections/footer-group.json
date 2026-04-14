@@ -32,7 +32,7 @@
           "type": "text",
           "settings": {
             "heading": "Contact Info",
-            "subtext": "<p>Via Francesco Mancuso, 9 88890 Crotone (KR)<\/p><p>+44 105 8333 501<\/p><p>info@zeussport.it<\/p>"
+            "subtext": "<p>Via Francesco Mancuso, 9 88890 Crotone (KR)</p><p>+44 105 8333 501</p><p>info@zeussport.it</p>"
           }
         },
         "footer-3": {
@@ -51,13 +51,14 @@
       ],
       "settings": {
         "color_scheme": "scheme-3",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_enable": false,
+        "newsletter_heading": "Sottoscriviti alla newsletter!",
+        "enable_follow_on_shop": false,
         "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
         "payment_enable": true,
-        "show_policy": false,
+        "show_policy": true,
         "margin_top": 48,
         "padding_top": 36,
         "padding_bottom": 36
