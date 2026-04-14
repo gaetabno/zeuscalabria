@@ -148,43 +148,63 @@
       "blocks": {
         "logo_3PinQP": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo_imyVHR": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo_zFJhgV": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo_VFTQy6": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo_4wGeHA": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo-1": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo-2": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo-3": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo-4": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         },
         "logo-5": {
           "type": "logo",
-          "settings": {}
+          "settings": {
+            "link": ""
+          }
         }
       },
       "block_order": [
