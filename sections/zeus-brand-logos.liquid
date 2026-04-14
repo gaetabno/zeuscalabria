@@ -3,16 +3,12 @@
   <div class="zeus-brands__grid">
     {% for block in section.blocks %}
       <div class="zeus-brands__logo">
-        {% if block.settings.image != blank %}
-          {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
-        {% else %}
-          {% if block.settings.link != blank %}
-            <a href="{{ block.settings.link }}">
-              {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
-            </a>
-          {% else %}
+        {% if block.settings.link != blank %}
+          <a href="{{ block.settings.link }}">
             {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
-          {% endif %}
+          </a>
+        {% else %}
+          {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
       </div>
     {% endfor %}
